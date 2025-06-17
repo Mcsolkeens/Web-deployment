@@ -20,9 +20,11 @@ jobs:
           chmod 600 key.pem
       - name: Install apache on httpd
         run: |
-          sudo yum install httpd
-          systemctl start httpd.service
-          systemctl status httpd
+           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
+            sudo yum install -y httpd
+            sudo systemctl start httpd
+            sudo systemctl enable httpd
+           EOF
 
       - name: Deploy Files via rsync
         run: |

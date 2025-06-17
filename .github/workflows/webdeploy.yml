@@ -18,7 +18,8 @@ jobs:
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 600 key.pem
-      - run: |
+      - name: Install apache on httpd
+        run: |
           sudo yum install httpd
           systemctl start httpd.service
           systemctl status httpd

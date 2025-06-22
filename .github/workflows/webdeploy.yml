@@ -28,6 +28,6 @@ jobs:
 
       - name: Deploy Files via rsync
         run: |
-           rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -i key.pem" ./ \
+           rsync -avz --delete -e --exclude=key.pem \ "ssh -o StrictHostKeyChecking=no -i key.pem" ./ \
               ec2-user@${{ secrets.EC2_HOST }}:/var/www/html/ --rsync-path="sudo rsync"
 

@@ -21,7 +21,7 @@ jobs:
       - name: Install apache on httpd
         run: |
            ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-            sudo yum install -y httpd
+            sudo yum install -y httpd php
             sudo systemctl start httpd
             sudo systemctl enable httpd
            EOF

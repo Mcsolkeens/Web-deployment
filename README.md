@@ -1,7 +1,7 @@
 # EC2 Web Deployment Workflow
 
 This repository includes a GitHub Actions workflow for automatic deployment of website files to an AWS EC2 instance when code is pushed to the webdeploy branch.
-Developer code can be cloneto your repo: gir clone https://github.com/whxitte/Project-Taaza.git
+Developer code can be clone to your repo: git clone https://github.com/whxitte/Project-Taaza.git
 
  # Workflow Overview
 
@@ -23,6 +23,35 @@ Connects to a remote EC2 instance, installs Apache & PHP if needed, and deploys 
     Deploy Website Files
     Uses rsync over SSH to transfer files to /var/www/html/ on the EC2 instance.
 
+# Security Considerations
+   Best Practices Implemented
+
+    Secrets Management:
+    Sensitive information such as the SSH private key (EC2_SSH_KEY) and EC2 host address (EC2_HOST) are stored securely using GitHub Secrets.
+
+    File Permissions:
+    The SSH key file (key.pem) is given 600 permissions to restrict access.
+
+    Strict Host Key Checking Disabled (Temporary):
+    The line StrictHostKeyChecking=no is used to avoid manual host verification. For production, you should consider managing known hosts securely.
+
+    Minimal Exposure:
+    The SSH key is never printed or logged. It is excluded from deployment using --exclude=key.pem.
+
+ Testing
+
+To test deployment, push any changes to the webdeploy branch. GitHub Actions will execute the deployment pipeline automatically.
+
+# Secrets Required
+
+To enable this workflow, you must define the following repository-level secrets:
+Secret Name	Description
+EC2_SSH_KEY	Private SSH key for EC2 access
+EC2_HOST	Public IP or DNS of the EC2 instance
+
+# Important Note
+
+Never commit your private SSH key or sensitive configuration files directly to the repository. Always use GitHub Secrets for secret management.
 
 
 

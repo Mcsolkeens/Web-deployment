@@ -59,7 +59,10 @@ Never commit your private SSH key or sensitive configuration files directly to t
 
 Problem Encountered
 
-After deploying the code to your EC2 instance and navigating to: http://<your-ec2-public-ip>
+After deploying the code to your EC2 instance. Launch the web site using the public EC2 IP:
+http://publicIP
+Note: ensure your EC2 has internet access and in public subnet. Equally enable http traffic from anywhere on the security group
+
 
 
 Apache displayed the default "It works!" page, instead of loading your website or PHP application.

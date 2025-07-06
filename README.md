@@ -59,9 +59,8 @@ Never commit your private SSH key or sensitive configuration files directly to t
 
 Problem Encountered
 
-After deploying the code to your EC2 instance and navigating to:
+After deploying the code to your EC2 instance and navigating to: http://<your-ec2-public-ip>
 
-http://<your-ec2-public-ip>
 
 Apache displayed the default "It works!" page, instead of loading your website or PHP application.
 

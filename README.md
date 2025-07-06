@@ -1,3 +1,41 @@
+# EC2 Web Deployment Workflow
+
+This repository includes a GitHub Actions workflow for automatic deployment of website files to an AWS EC2 instance when code is pushed to the webdeploy branch.
+# NB 
+clone/check out developer code at 
+ # Workflow Overview
+
+Trigger: On push to webdeploy branch
+Action: Connects to a remote EC2 instance, installs Apache & PHP if needed, and deploys website files using rsync.
+
+# Workflow Steps
+
+    Checkout Code
+    Uses the latest version of the repo on push.
+
+    Setup SSH Key
+    The private SSH key is securely retrieved from GitHub Secrets and saved as key.pem for use in the SSH session.
+
+    Install Apache & PHP
+    Connects to the EC2 instance via SSH and installs required software.
+
+    Deploy Website Files
+    Uses rsync over SSH to transfer files to /var/www/html/ on the EC2 instance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Project-Taaza
 
 <a href="https://www.instagram.com/whxitte"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" /></a> <a href="https://www.linkedin.com/in/sethusatheesh/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="https://medium.com/@S3THU"><img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white" /></a>

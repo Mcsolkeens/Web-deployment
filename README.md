@@ -45,6 +45,7 @@ To test deployment, push any changes to the webdeploy branch. GitHub Actions wil
 # Secrets Required
 
 To enable this workflow, you must define the following repository-level secrets:
+
 Secret Name	Description
 EC2_SSH_KEY	Private SSH key for EC2 access
 EC2_HOST	Public IP or DNS of the EC2 instance
@@ -54,6 +55,65 @@ EC2_HOST	Public IP or DNS of the EC2 instance
 Never commit your private SSH key or sensitive configuration files directly to the repository. Always use GitHub Secrets for secret management.
 
 
+# Deployment Challenge: Apache Displaying Default "It Works!" Page Instead of PHP Site
+
+Problem Encountered
+
+After deploying the code to your EC2 instance and navigating to:
+
+http://<your-ec2-public-ip>
+
+Apache displayed the default "It works!" page, instead of loading your website or PHP application.
+
+Initial Observations
+
+This issue occurred because:
+
+    Apache was serving its default content.
+
+    The original index.php in your project wasn’t being rendered.
+
+    PHP was not yet installed or enabled on the server.
+
+    Apache was prioritizing its default index.html or not executing PHP properly.
+
+# Solution 
+- Before Testing PHP
+
+To avoid a conflict with your original application file, you renamed the existing index.php in your deployment code to:
+
+sudo mv /var/www/html/index.php /var/www/html/index2.php
+
+This ensured that the Apache default page or your own file wouldn’t interfere with the PHP test file.
+🔧 1. Install PHP and Required Modules
+
+On Debian run:
+
+sudo apt update
+sudo apt install -y php libapache2-mod-php
+sudo systemctl restart apache2
+
+This enabled Apache to process .php files.
+🧪 2. Test PHP Setup
+
+You then created a test file to verify PHP was working:
+
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/index.php
+
+Visiting:
+
+http://<your-ec2-public-ip>/index.php
+
+✅ Displayed the PHP info page successfully.
+
+# Cleanup and Restore
+
+After confirming PHP was functional:
+
+sudo rm /var/www/html/index.php
+sudo mv /var/www/html/index2.php /var/www/html/index.php
+
+This restored your original site file and removed the temporary test page.
 
 
 

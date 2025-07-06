@@ -1,12 +1,13 @@
 # EC2 Web Deployment Workflow
 
 This repository includes a GitHub Actions workflow for automatic deployment of website files to an AWS EC2 instance when code is pushed to the webdeploy branch.
-# NB 
-clone/check out developer code at 
+Developer code can be cloneto your repo: gir clone https://github.com/whxitte/Project-Taaza.git
+
  # Workflow Overview
 
 Trigger: On push to webdeploy branch
-Action: Connects to a remote EC2 instance, installs Apache & PHP if needed, and deploys website files using rsync.
+Action: 
+Connects to a remote EC2 instance, installs Apache & PHP if needed, and deploys website files using rsync.
 
 # Workflow Steps
 
